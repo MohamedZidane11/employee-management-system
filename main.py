@@ -1,3 +1,3 @@
 import database
 
-database.create_table()
+database.fetch_employees()
