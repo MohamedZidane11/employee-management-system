@@ -30,6 +30,7 @@ def fetch_employees():
 def insert_employee(name, role, gender, status):
     conn = sqlite3.connect("Employees.db")
     cursor = conn.cursor()
+
     cursor.execute('insert into Employees (name, role, gender, status) values (?, ?, ?, ?)',
                    (name, role, gender, status))
     conn.commit()
