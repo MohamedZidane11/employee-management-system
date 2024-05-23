@@ -20,6 +20,7 @@ fg_color1 = '#fff'
 hover_color1 = '#00850b'
 
 # ================= labels and entry fields =================
+
 id_label = customtkinter.CTkLabel(app, font=font1, text='ID', text_color='#fff', bg_color=bg_color1)
 id_label.place(x=20, y=20)
 id_entry = customtkinter.CTkEntry(app, font=font1, text_color='#000', fg_color='#fff', border_color='#0c9295', border_width=2, width=180)
@@ -51,7 +52,8 @@ status_entry = customtkinter.CTkEntry(app, font=font1, text_color='#000', fg_col
 status_entry.place(x=100, y=260)
 
 
-# ================= labels and entry fields =================
+# ================= action buttons =================
+
 add_button = customtkinter.CTkButton(app, font=font1, text='Add Employee', text_color='#fff', fg_color='#05a312', hover_color=hover_color1, bg_color=bg_color1, cursor='hand2', corner_radius=15, width=260)
 add_button.place(x=20, y=310)
 clear_button = customtkinter.CTkButton(app, font=font1, text='New Employee', text_color='#fff', fg_color='#161c25', hover_color='#ff5002', bg_color=bg_color1, border_width=2, border_color='#f15704', cursor='hand2', corner_radius=15, width=260)
@@ -61,6 +63,19 @@ update_button.place(x=300, y=360)
 delete_button = customtkinter.CTkButton(app, font=font1, text='Delete Employee', text_color='#fff', fg_color='#e40404', hover_color='#ae0000', bg_color=bg_color1, border_color='#e40404', cursor='hand2', corner_radius=15, width=260)
 delete_button.place(x=580, y=360)
 
+
+# ================= Tree View =================
+
+style = ttk.Style(app)
+
+style.theme_use('clam')
+style.configure('Treeview', font=font2, foreground='#fff', background='#000', fieldbackground='#313837')
+style.map('Treeview', background=[('selected', '#1a8f2d')])
+
+tree = ttk.Treeview(app, height=15)
+tree.place(x=300, y=20)
+
+# ================= Mainloop =================
 app.mainloop()
 
 
