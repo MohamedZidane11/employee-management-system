@@ -7,7 +7,7 @@ def create_table():
 
     cursor.execute('''
     CREATE TABLE IF NOT EXISTS Employees(
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            emp_id TEXT PRIMARY KEY,
             name TEXT,
             role TEXT,
             gender TEXT,
@@ -27,40 +27,40 @@ def fetch_employees():
     return all_employees
 
 
-def insert_employee(name, role, gender, status):
+def insert_employee(emp_id, name, role, gender, status):
     conn = sqlite3.connect("Employees.db")
     cursor = conn.cursor()
 
-    cursor.execute('insert into Employees (name, role, gender, status) values (?, ?, ?, ?)',
-                   (name, role, gender, status))
+    cursor.execute('insert into Employees (emp_id, name, role, gender, status) values (?, ?, ?, ?, ?)',
+                   (emp_id, name, role, gender, status))
     conn.commit()
     conn.close()
 
 
-def delete_employee(id):
+def delete_employee(emp_id):
     conn = sqlite3.connect('Employees.db')
     cursor = conn.cursor()
 
-    cursor.execute('delete from Employees where id = ?', (id,))
+    cursor.execute('delete from Employees where emp_id = ?', (emp_id,))
     conn.commit()
     conn.close()
 
 
-def update_employee(new_name, new_role, new_gender, new_status, id):
+def update_employee(new_name, new_role, new_gender, new_status, emp_id):
     conn = sqlite3.connect('Employees.db')
     cursor = conn.cursor()
 
-    cursor.execute('update Employees set name=?, role=?, gender=?, status=? where id=?',
-                   (new_name, new_role, new_gender, new_status, id))
+    cursor.execute('update Employees set name=?, role=?, gender=?, status=? where emp_id=?',
+                   (new_name, new_role, new_gender, new_status, emp_id))
     conn.commit()
     conn.close()
 
 
-def id_exists(id):
+def id_exists(emp_id):
     conn = sqlite3.connect('Employees.db')
     cursor = conn.cursor()
 
-    cursor.execute('select count(*) from Employees where id=?', (id,))
+    cursor.execute('select count(*) from Employees where emp_id=?', (emp_id,))
     result = cursor.fetchone()
     conn.close()
     return result[0] > 0
