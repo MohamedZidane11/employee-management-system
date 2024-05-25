@@ -23,6 +23,31 @@ fg_color1 = '#fff'
 hover_color1 = '#00850b'
 
 
+# ================= TreeView Functions =================
+
+def add_to_treeview():
+    employees = database.fetch_employees()
+    tree.delete(*tree.get_children())
+    for employee in employees:
+        tree.insert('', END, values=employee)
+
+
+def insert():
+    emp_id = id_entry.get()
+    name = name_entry.get()
+    role = role_entry.get()
+    gender = variable1.get()
+    status = status_entry.get()
+    if not (emp_id and name and role and gender and status):
+        messagebox.showerror('Error', 'All fields are required\nPlease enter all fields.')
+    elif database.id_exists(emp_id):
+        messagebox.showerror('Error', 'ID already exists.')
+    else:
+        database.insert_employee(emp_id, name, role, gender, status)
+        add_to_treeview()
+        messagebox.showinfo('Success', 'Data has been inserted.')
+
+
 # ================= labels and entry fields =================
 
 id_label = customtkinter.CTkLabel(app, font=font1, text='ID *', text_color='#fff', bg_color=bg_color1)
@@ -64,7 +89,7 @@ dev_label.place(x=440, y=400)
 
 # ================= action buttons =================
 
-add_button = customtkinter.CTkButton(app, font=font1, text='Add Employee', text_color='#fff', fg_color='#05a312', hover_color=hover_color1, bg_color=bg_color1, cursor='hand2', corner_radius=15, width=260)
+add_button = customtkinter.CTkButton(app, command=insert, font=font1, text='Add Employee', text_color='#fff', fg_color='#05a312', hover_color=hover_color1, bg_color=bg_color1, cursor='hand2', corner_radius=15, width=260)
 add_button.place(x=20, y=310)
 clear_button = customtkinter.CTkButton(app, font=font1, text='New Employee', text_color='#fff', fg_color='#161c25', hover_color='#ff5002', bg_color=bg_color1, border_width=2, border_color='#f15704', cursor='hand2', corner_radius=15, width=260)
 clear_button.place(x=20, y=360)
@@ -100,7 +125,8 @@ tree.heading('Role', text='Role')
 tree.heading('Gender', text='Gender')
 tree.heading('Status', text='Status')
 
-# ================= Mainloop =================
+# ================= Mainloop func =================
+add_to_treeview()
 app.mainloop()
 
 
