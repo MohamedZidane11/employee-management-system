@@ -42,6 +42,18 @@ def clear(*clicked):
     status_entry.delete(0, END)
 
 
+def display_data(event):
+    selected_item = tree.focus()
+    if selected_item:
+        data_row = tree.item(selected_item)['values']
+        clear()
+        id_entry.insert(0, data_row[0])
+        name_entry.insert(0, data_row[1])
+        role_entry.insert(0, data_row[2])
+        variable1.set(data_row[3])
+        status_entry.insert(0, data_row[4])
+
+
 def insert():
     emp_id = id_entry.get()
     name = name_entry.get()
@@ -136,7 +148,6 @@ tree.heading('Gender', text='Gender')
 tree.heading('Status', text='Status')
 
 # ================= Mainloop func =================
+tree.bind('<ButtonRelease>', display_data)
 add_to_treeview()
 app.mainloop()
-
-
