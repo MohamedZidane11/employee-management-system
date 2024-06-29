@@ -32,6 +32,16 @@ def add_to_treeview():
         tree.insert('', END, values=employee)
 
 
+def clear(*clicked):
+    if clicked:
+        tree.selection_remove(tree.focus())
+    id_entry.delete(0, END)
+    name_entry.delete(0, END)
+    role_entry.delete(0, END)
+    variable1.set('Male')
+    status_entry.delete(0, END)
+
+
 def insert():
     emp_id = id_entry.get()
     name = name_entry.get()
@@ -91,7 +101,7 @@ dev_label.place(x=440, y=400)
 
 add_button = customtkinter.CTkButton(app, command=insert, font=font1, text='Add Employee', text_color='#fff', fg_color='#05a312', hover_color=hover_color1, bg_color=bg_color1, cursor='hand2', corner_radius=15, width=260)
 add_button.place(x=20, y=310)
-clear_button = customtkinter.CTkButton(app, font=font1, text='New Employee', text_color='#fff', fg_color='#161c25', hover_color='#ff5002', bg_color=bg_color1, border_width=2, border_color='#f15704', cursor='hand2', corner_radius=15, width=260)
+clear_button = customtkinter.CTkButton(app, command=lambda:clear(True), font=font1, text='New Employee', text_color='#fff', fg_color='#161c25', hover_color='#ff5002', bg_color=bg_color1, border_width=2, border_color='#f15704', cursor='hand2', corner_radius=15, width=260)
 clear_button.place(x=20, y=360)
 update_button = customtkinter.CTkButton(app, font=font1, text='Update Employee', text_color='#fff', fg_color='#161c25', hover_color='#ff5002', bg_color=bg_color1, border_width=2, border_color='#f15704', cursor='hand2', corner_radius=15, width=260)
 update_button.place(x=300, y=360)
